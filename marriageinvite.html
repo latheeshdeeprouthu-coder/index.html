@@ -1,0 +1,3865 @@
+<!DOCTYPE html>
+<html lang="te">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#5a1018">
+  <meta name="description" content="తెలుగు వివాహ ఆహ్వాన పత్రిక">
+
+  <title>శుభ వివాహ ఆహ్వానం</title>
+
+  <!-- Bootstrap 5 -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  >
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Serif+Telugu:wght@400;500;600;700;800&family=Tiro+Telugu:ital@0;1&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+
+    /* =========================================================
+       ROOT VARIABLES
+    ========================================================= */
+
+    :root {
+      --ivory: #f8f0dc;
+      --parchment: #efe0bd;
+      --parchment-dark: #d6bd8a;
+      --maroon: #64131d;
+      --deep-maroon: #3a0910;
+      --traditional-red: #9b2424;
+      --gold: #b8862f;
+      --light-gold: #e2c77a;
+      --dark-green: #263f31;
+      --ink: #332218;
+      --muted: #765d45;
+
+      --shadow:
+        0 20px 50px rgba(65, 31, 15, 0.16);
+
+      --royal-shadow:
+        0 12px 40px rgba(71, 20, 15, 0.22);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(184,134,47,.08), transparent 25%),
+        radial-gradient(circle at 80% 80%, rgba(100,19,29,.06), transparent 25%),
+        var(--ivory);
+      color: var(--ink);
+      font-family: "Noto Serif Telugu", serif;
+      overflow-x: hidden;
+    }
+
+    body.dark-mode {
+      --ivory: #17120e;
+      --parchment: #251b15;
+      --parchment-dark: #3a291e;
+      --maroon: #b54450;
+      --deep-maroon: #0b0705;
+      --traditional-red: #b63b35;
+      --gold: #d6ae55;
+      --light-gold: #f0d487;
+      --dark-green: #77967b;
+      --ink: #f2e3c1;
+      --muted: #c6aa82;
+
+      background:
+        radial-gradient(circle at 50% 20%, rgba(184,134,47,.12), transparent 30%),
+        #110d0a;
+    }
+
+    body,
+    section,
+    .manuscript-card,
+    .event-card,
+    .music-player {
+      transition:
+        background-color .5s ease,
+        color .5s ease,
+        border-color .5s ease;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    textarea {
+      font-family: inherit;
+    }
+
+    /* =========================================================
+       MANUSCRIPT TEXTURE
+    ========================================================= */
+
+    .manuscript-texture {
+      background-image:
+        radial-gradient(rgba(90,55,30,.07) 1px, transparent 1px),
+        radial-gradient(rgba(90,55,30,.04) 1px, transparent 1px);
+
+      background-size: 19px 19px, 31px 31px;
+      background-position: 0 0, 10px 8px;
+    }
+
+    body.dark-mode .manuscript-texture {
+      background-image:
+        radial-gradient(rgba(255,215,150,.035) 1px, transparent 1px),
+        radial-gradient(rgba(255,215,150,.02) 1px, transparent 1px);
+    }
+
+    /* =========================================================
+       LOADING / OPENING SCREEN
+    ========================================================= */
+
+    #opening {
+      min-height: 100svh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+
+      background:
+        linear-gradient(
+          rgba(74, 15, 19, .08),
+          rgba(74, 15, 19, .08)
+        ),
+        var(--ivory);
+    }
+
+    .opening-frame {
+      width: min(92%, 900px);
+      min-height: 650px;
+
+      position: relative;
+
+      padding: 70px 25px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      text-align: center;
+
+      border: 12px double var(--gold);
+
+      box-shadow:
+        0 0 0 4px var(--maroon),
+        0 0 0 8px var(--gold),
+        var(--royal-shadow);
+
+      background:
+        linear-gradient(
+          rgba(255,255,255,.05),
+          rgba(255,255,255,.05)
+        ),
+        var(--parchment);
+
+      animation: manuscriptReveal 1.8s ease both;
+    }
+
+    .opening-inner {
+      width: 100%;
+      position: relative;
+      z-index: 5;
+    }
+
+    .om-symbol {
+      font-size: clamp(45px, 10vw, 90px);
+      color: var(--traditional-red);
+      margin-bottom: 15px;
+    }
+
+    .sanskrit {
+      color: var(--maroon);
+      font-size: clamp(18px, 3vw, 28px);
+      letter-spacing: 2px;
+      margin-bottom: 35px;
+    }
+
+    .opening-title {
+      font-family: "Tiro Telugu", serif;
+      color: var(--maroon);
+      font-size: clamp(34px, 7vw, 72px);
+      line-height: 1.3;
+      margin-bottom: 15px;
+    }
+
+    .opening-subtitle {
+      color: var(--muted);
+      font-size: clamp(15px, 2vw, 20px);
+      max-width: 600px;
+      margin: auto;
+      line-height: 2;
+    }
+
+    .royal-button {
+      border: 1px solid var(--gold);
+      background:
+        linear-gradient(
+          135deg,
+          var(--maroon),
+          var(--deep-maroon)
+        );
+
+      color: #fff3d1;
+
+      padding: 15px 28px;
+      margin-top: 35px;
+
+      border-radius: 3px;
+
+      box-shadow:
+        0 10px 30px rgba(80,20,20,.2);
+
+      position: relative;
+      overflow: hidden;
+
+      transition: .3s ease;
+    }
+
+    .royal-button:hover {
+      transform: translateY(-3px);
+      box-shadow:
+        0 15px 35px rgba(80,20,20,.3);
+    }
+
+    .royal-button::before {
+      content: "";
+      position: absolute;
+      inset: 4px;
+      border: 1px solid rgba(255,220,130,.35);
+      pointer-events: none;
+    }
+
+    /* =========================================================
+       DECORATIONS
+    ========================================================= */
+
+    .mandala {
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      border: 2px solid var(--gold);
+      border-radius: 50%;
+      opacity: .12;
+      pointer-events: none;
+    }
+
+    .mandala::before,
+    .mandala::after {
+      content: "";
+      position: absolute;
+      inset: 25px;
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+    }
+
+    .mandala::after {
+      inset: 55px;
+    }
+
+    .mandala-1 {
+      top: -90px;
+      left: -80px;
+      animation: slowRotate 45s linear infinite;
+    }
+
+    .mandala-2 {
+      bottom: -100px;
+      right: -80px;
+      animation: slowRotateReverse 55s linear infinite;
+    }
+
+    .corner {
+      position: absolute;
+      width: 110px;
+      height: 110px;
+      border-color: var(--gold);
+      opacity: .7;
+    }
+
+    .corner.tl {
+      top: 20px;
+      left: 20px;
+      border-top: 2px solid;
+      border-left: 2px solid;
+    }
+
+    .corner.tr {
+      top: 20px;
+      right: 20px;
+      border-top: 2px solid;
+      border-right: 2px solid;
+    }
+
+    .corner.bl {
+      bottom: 20px;
+      left: 20px;
+      border-bottom: 2px solid;
+      border-left: 2px solid;
+    }
+
+    .corner.br {
+      bottom: 20px;
+      right: 20px;
+      border-bottom: 2px solid;
+      border-right: 2px solid;
+    }
+
+    /* =========================================================
+       TORANAM
+    ========================================================= */
+
+    .toranam {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 65px;
+      z-index: 10;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .leaf {
+      position: absolute;
+      top: -10px;
+      width: 25px;
+      height: 45px;
+      background: var(--dark-green);
+      border-radius: 80% 0 80% 0;
+      transform: rotate(35deg);
+      opacity: .9;
+    }
+
+    /* =========================================================
+       MAIN WEBSITE
+    ========================================================= */
+
+    #weddingSite {
+      display: none;
+    }
+
+    section {
+      position: relative;
+      padding: 100px 0;
+      overflow: hidden;
+    }
+
+    .section-heading {
+      text-align: center;
+      margin-bottom: 55px;
+    }
+
+    .section-heading .small-title {
+      color: var(--gold);
+      font-size: 15px;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+    }
+
+    .section-heading h2 {
+      color: var(--maroon);
+      font-family: "Tiro Telugu", serif;
+      font-size: clamp(32px, 6vw, 58px);
+      margin-bottom: 15px;
+    }
+
+    .section-heading p {
+      max-width: 700px;
+      margin: auto;
+      color: var(--muted);
+      line-height: 2;
+    }
+
+    .ornament {
+      width: 150px;
+      height: 1px;
+      background: var(--gold);
+      margin: 20px auto;
+      position: relative;
+    }
+
+    .ornament::before {
+      content: "❈";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      background: var(--ivory);
+      padding: 0 12px;
+      color: var(--gold);
+    }
+
+    /* =========================================================
+       NAVIGATION
+    ========================================================= */
+
+    .manuscript-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 999;
+
+      background: rgba(58,9,16,.94);
+      border-bottom: 1px solid var(--gold);
+
+      backdrop-filter: blur(10px);
+
+      transform: translateY(-100%);
+      transition: .5s ease;
+    }
+
+    .manuscript-nav.show {
+      transform: translateY(0);
+    }
+
+    .nav-link {
+      color: #f4dfb0 !important;
+      font-size: 14px;
+    }
+
+    .nav-link:hover {
+      color: var(--light-gold) !important;
+    }
+
+    .theme-button {
+      border: 1px solid var(--gold);
+      color: var(--light-gold);
+      background: transparent;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+    }
+
+    /* =========================================================
+       HERO
+    ========================================================= */
+
+    #hero {
+      min-height: 100svh;
+
+      display: flex;
+      align-items: center;
+
+      background:
+        radial-gradient(
+          circle at center,
+          rgba(184,134,47,.12),
+          transparent 50%
+        ),
+        var(--ivory);
+    }
+
+    .hero-manuscript {
+      text-align: center;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .hero-symbol {
+      font-size: 50px;
+      color: var(--gold);
+    }
+
+    .hero-title {
+      font-family: "Tiro Telugu", serif;
+      color: var(--maroon);
+      font-size: clamp(42px, 8vw, 88px);
+      line-height: 1.35;
+    }
+
+    .couple-names {
+      font-size: clamp(30px, 6vw, 65px);
+      color: var(--traditional-red);
+      margin: 30px 0;
+    }
+
+    .wedding-date {
+      color: var(--muted);
+      font-size: 20px;
+    }
+
+    /* =========================================================
+       FAMILY / COUPLE
+    ========================================================= */
+
+    .manuscript-card {
+      position: relative;
+
+      background: var(--parchment);
+
+      border: 1px solid var(--gold);
+
+      padding: 30px;
+
+      box-shadow: var(--shadow);
+
+      height: 100%;
+    }
+
+    .manuscript-card::before {
+      content: "";
+      position: absolute;
+      inset: 10px;
+      border: 1px solid rgba(184,134,47,.35);
+      pointer-events: none;
+    }
+
+    .portrait-frame {
+      width: 230px;
+      height: 290px;
+
+      margin: auto;
+
+      border: 7px double var(--gold);
+
+      padding: 8px;
+
+      background: var(--ivory);
+
+      position: relative;
+    }
+
+    .portrait-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .portrait-placeholder {
+      width: 100%;
+      height: 100%;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      text-align: center;
+
+      background:
+        repeating-linear-gradient(
+          45deg,
+          rgba(100,19,29,.03) 0,
+          rgba(100,19,29,.03) 2px,
+          transparent 2px,
+          transparent 8px
+        );
+
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .person-name {
+      color: var(--maroon);
+      font-family: "Tiro Telugu", serif;
+      font-size: 30px;
+      margin-top: 25px;
+    }
+
+    /* =========================================================
+       COUPLE STORY
+    ========================================================= */
+
+    .story-scroll {
+      max-width: 850px;
+      margin: auto;
+
+      padding: 45px;
+
+      border-top: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+
+      text-align: center;
+
+      font-size: 18px;
+      line-height: 2.2;
+
+      color: var(--ink);
+    }
+
+    .ink-line {
+      width: 0;
+      height: 2px;
+      background: var(--maroon);
+      margin: 25px auto;
+      transition: width 1.5s ease;
+    }
+
+    .reveal.visible .ink-line {
+      width: 120px;
+    }
+
+    /* =========================================================
+       RITUALS
+    ========================================================= */
+
+    .ritual-card {
+      height: 100%;
+
+      padding: 30px;
+
+      background: var(--parchment);
+
+      border: 1px solid var(--gold);
+
+      text-align: center;
+
+      box-shadow: 0 10px 30px rgba(50,20,10,.08);
+
+      transition: .35s ease;
+    }
+
+    .ritual-card:hover {
+      transform: translateY(-6px);
+    }
+
+    .ritual-icon {
+      font-size: 45px;
+      margin-bottom: 15px;
+    }
+
+    .ritual-card h3 {
+      color: var(--maroon);
+      font-size: 23px;
+    }
+
+    .ritual-card p {
+      color: var(--muted);
+      line-height: 1.9;
+    }
+
+    /* =========================================================
+       SAPTHAPADI
+    ========================================================= */
+
+    .sapthapadi-container {
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .steps {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+
+    .step-button {
+      width: 55px;
+      height: 55px;
+
+      border-radius: 50%;
+
+      border: 1px solid var(--gold);
+
+      background: var(--parchment);
+
+      color: var(--maroon);
+
+      font-weight: 700;
+
+      transition: .3s ease;
+    }
+
+    .step-button.active,
+    .step-button:hover {
+      background: var(--maroon);
+      color: #fff1c8;
+    }
+
+    .vow-box {
+      padding: 45px;
+      text-align: center;
+
+      background: var(--parchment);
+
+      border: 1px solid var(--gold);
+
+      box-shadow: var(--shadow);
+
+      min-height: 200px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .vow-number {
+      color: var(--gold);
+      margin-bottom: 15px;
+    }
+
+    .vow-text {
+      color: var(--maroon);
+      font-size: 22px;
+      line-height: 2;
+    }
+
+    /* =========================================================
+       EVENTS
+    ========================================================= */
+
+    .event-card {
+      background: var(--parchment);
+      border: 1px solid var(--gold);
+      padding: 30px;
+      position: relative;
+      height: 100%;
+    }
+
+    .event-date {
+      color: var(--gold);
+      font-size: 14px;
+      letter-spacing: 1px;
+    }
+
+    .event-card h3 {
+      color: var(--maroon);
+      font-family: "Tiro Telugu", serif;
+      margin: 10px 0;
+    }
+
+    .event-card p {
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    /* =========================================================
+       COUNTDOWN
+    ========================================================= */
+
+    .countdown-section {
+      background:
+        linear-gradient(
+          rgba(58,9,16,.95),
+          rgba(58,9,16,.95)
+        ),
+        var(--deep-maroon);
+
+      color: #f7e4b2;
+    }
+
+    .countdown-section .section-heading h2,
+    .countdown-section .section-heading p {
+      color: #f7e4b2;
+    }
+
+    .countdown-box {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .time-box {
+      min-width: 110px;
+      padding: 25px 15px;
+
+      border: 1px solid var(--gold);
+
+      background: rgba(255,255,255,.04);
+
+      text-align: center;
+    }
+
+    .time-number {
+      font-size: 38px;
+      color: var(--light-gold);
+      font-weight: 700;
+    }
+
+    .time-label {
+      color: #d5bc87;
+      font-size: 13px;
+    }
+
+    /* =========================================================
+       VENUE
+    ========================================================= */
+
+    .venue-card {
+      max-width: 850px;
+      margin: auto;
+      text-align: center;
+
+      padding: 50px 30px;
+
+      background: var(--parchment);
+
+      border: 1px solid var(--gold);
+
+      box-shadow: var(--shadow);
+    }
+
+    .venue-icon {
+      font-size: 55px;
+      color: var(--maroon);
+    }
+
+    .venue-card h3 {
+      color: var(--maroon);
+      font-size: 30px;
+    }
+
+    .venue-address {
+      color: var(--muted);
+      line-height: 2;
+    }
+
+    .action-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .action-button {
+      padding: 12px 18px;
+      border: 1px solid var(--gold);
+      background: transparent;
+      color: var(--maroon);
+      transition: .3s;
+    }
+
+    .action-button:hover {
+      background: var(--maroon);
+      color: #fff0c5;
+    }
+
+    /* =========================================================
+       GALLERY
+    ========================================================= */
+
+    .gallery-item {
+      height: 260px;
+      overflow: hidden;
+
+      border: 5px solid var(--gold);
+
+      background: var(--parchment);
+
+      cursor: pointer;
+
+      position: relative;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+
+      transition: transform .6s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.06);
+    }
+
+    .gallery-placeholder {
+      width: 100%;
+      height: 100%;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    /* =========================================================
+       RSVP
+    ========================================================= */
+
+    .rsvp-card {
+      max-width: 700px;
+      margin: auto;
+
+      padding: 40px;
+
+      background: var(--parchment);
+
+      border: 1px solid var(--gold);
+
+      box-shadow: var(--shadow);
+    }
+
+    .form-control,
+    .form-select {
+      background: var(--ivory);
+      border: 1px solid var(--gold);
+      color: var(--ink);
+      padding: 12px;
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+      border-color: var(--maroon);
+      box-shadow: 0 0 0 .15rem rgba(100,19,29,.1);
+      background: var(--ivory);
+      color: var(--ink);
+    }
+
+    /* =========================================================
+       MUSIC PLAYER
+    ========================================================= */
+
+    .music-player {
+      position: fixed;
+
+      right: 15px;
+      bottom: 15px;
+
+      z-index: 1000;
+
+      width: min(340px, calc(100% - 30px));
+
+      padding: 15px;
+
+      background: rgba(58,9,16,.96);
+
+      border: 1px solid var(--gold);
+
+      box-shadow: var(--royal-shadow);
+
+      color: #f8e6b6;
+
+      border-radius: 5px;
+    }
+
+    .music-title {
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    .music-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .music-button {
+      width: 36px;
+      height: 36px;
+
+      border-radius: 50%;
+
+      background: transparent;
+
+      border: 1px solid var(--gold);
+
+      color: var(--light-gold);
+    }
+
+    .progress-container {
+      flex: 1;
+    }
+
+    #musicProgress {
+      width: 100%;
+      accent-color: var(--gold);
+    }
+
+    .volume {
+      width: 75px;
+      accent-color: var(--gold);
+    }
+
+    /* =========================================================
+       TEMPLE BELL
+    ========================================================= */
+
+    #bellButton {
+      position: fixed;
+
+      left: 15px;
+      bottom: 15px;
+
+      z-index: 1000;
+
+      width: 50px;
+      height: 50px;
+
+      border-radius: 50%;
+
+      border: 1px solid var(--gold);
+
+      background: var(--maroon);
+
+      color: #f6dfa9;
+
+      box-shadow: var(--royal-shadow);
+    }
+
+    .bell-ring {
+      animation: bellRing .7s ease;
+    }
+
+    /* =========================================================
+       PETALS
+    ========================================================= */
+
+    #petals {
+      position: fixed;
+      inset: 0;
+
+      pointer-events: none;
+
+      z-index: 900;
+
+      overflow: hidden;
+    }
+
+    .petal {
+      position: absolute;
+
+      top: -30px;
+
+      width: 10px;
+      height: 14px;
+
+      background: #d88989;
+
+      border-radius: 70% 0 70% 0;
+
+      opacity: .65;
+
+      animation: fall linear forwards;
+    }
+
+    /* =========================================================
+       LIGHTBOX
+    ========================================================= */
+
+    #lightbox {
+      position: fixed;
+      inset: 0;
+
+      background: rgba(10,5,3,.93);
+
+      z-index: 2000;
+
+      display: none;
+
+      align-items: center;
+      justify-content: center;
+
+      padding: 20px;
+    }
+
+    #lightbox img {
+      max-width: 95%;
+      max-height: 90vh;
+
+      border: 5px solid var(--gold);
+      box-shadow: var(--royal-shadow);
+    }
+
+    #closeLightbox {
+      position: absolute;
+      top: 20px;
+      right: 25px;
+
+      border: none;
+      background: none;
+
+      color: #fff;
+      font-size: 40px;
+    }
+
+    /* =========================================================
+       FINAL BLESSINGS
+    ========================================================= */
+
+    #blessings {
+      min-height: 90svh;
+
+      display: flex;
+      align-items: center;
+
+      text-align: center;
+
+      background:
+        radial-gradient(
+          circle at center,
+          rgba(184,134,47,.15),
+          transparent 50%
+        ),
+        var(--deep-maroon);
+
+      color: #f5dfaa;
+    }
+
+    #blessings .section-heading h2,
+    #blessings .section-heading p {
+      color: #f5dfaa;
+    }
+
+    .deepam {
+      font-size: 65px;
+
+      filter:
+        drop-shadow(0 0 20px rgba(255,190,60,.4));
+
+      animation: flamePulse 2s ease-in-out infinite;
+    }
+
+    .final-names {
+      font-family: "Tiro Telugu", serif;
+
+      font-size: clamp(35px, 7vw, 70px);
+
+      color: var(--light-gold);
+
+      margin: 25px 0;
+    }
+
+    /* =========================================================
+       SCROLL REVEAL
+    ========================================================= */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+
+      transition:
+        opacity .9s ease,
+        transform .9s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* =========================================================
+       TOAST
+    ========================================================= */
+
+    .custom-toast {
+      position: fixed;
+
+      bottom: 85px;
+      left: 50%;
+
+      transform: translateX(-50%) translateY(20px);
+
+      background: var(--maroon);
+      color: #ffecc0;
+
+      padding: 12px 20px;
+
+      border: 1px solid var(--gold);
+
+      opacity: 0;
+
+      pointer-events: none;
+
+      z-index: 3000;
+
+      transition: .3s ease;
+    }
+
+    .custom-toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* =========================================================
+       ANIMATIONS
+    ========================================================= */
+
+    @keyframes manuscriptReveal {
+      from {
+        opacity: 0;
+        transform: scale(.95) rotateX(8deg);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1) rotateX(0);
+      }
+    }
+
+    @keyframes slowRotate {
+      from {
+        transform: rotate(0);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes slowRotateReverse {
+      from {
+        transform: rotate(360deg);
+      }
+
+      to {
+        transform: rotate(0);
+      }
+    }
+
+    @keyframes fall {
+      to {
+        transform:
+          translate3d(100px, 110vh, 0)
+          rotate(720deg);
+      }
+    }
+
+    @keyframes bellRing {
+      0%,100% {
+        transform: rotate(0);
+      }
+
+      20% {
+        transform: rotate(12deg);
+      }
+
+      40% {
+        transform: rotate(-10deg);
+      }
+
+      60% {
+        transform: rotate(7deg);
+      }
+
+      80% {
+        transform: rotate(-5deg);
+      }
+    }
+
+    @keyframes flamePulse {
+      0%,100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.08);
+      }
+    }
+
+    /* =========================================================
+       MOBILE
+    ========================================================= */
+
+    @media(max-width: 576px) {
+
+      section {
+        padding: 75px 0;
+      }
+
+      .opening-frame {
+        min-height: 580px;
+        padding: 55px 20px;
+        border-width: 8px;
+      }
+
+      .corner {
+        width: 70px;
+        height: 70px;
+      }
+
+      .story-scroll {
+        padding: 25px 18px;
+        font-size: 16px;
+      }
+
+      .time-box {
+        min-width: 75px;
+        padding: 18px 8px;
+      }
+
+      .time-number {
+        font-size: 27px;
+      }
+
+      .music-player {
+        bottom: 10px;
+        right: 10px;
+        width: calc(100% - 20px);
+      }
+
+      #bellButton {
+        bottom: 100px;
+      }
+
+      .portrait-frame {
+        width: 190px;
+        height: 240px;
+      }
+
+      .rsvp-card {
+        padding: 25px 18px;
+      }
+    }
+
+    /* =========================================================
+       ACCESSIBILITY
+    ========================================================= */
+
+    @media(prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+<!-- =========================================================
+     PETALS
+========================================================= -->
+
+<div id="petals"></div>
+
+
+<!-- =========================================================
+     OPENING MANUSCRIPT
+========================================================= -->
+
+<section id="opening" class="manuscript-texture">
+
+  <div class="toranam" id="openingToranam"></div>
+
+  <div class="opening-frame">
+
+    <div class="mandala mandala-1"></div>
+    <div class="mandala mandala-2"></div>
+
+    <div class="corner tl"></div>
+    <div class="corner tr"></div>
+    <div class="corner bl"></div>
+    <div class="corner br"></div>
+
+    <div class="opening-inner">
+
+      <div class="om-symbol">ॐ</div>
+
+      <div class="sanskrit">
+        శ్రీ గణేశాయ నమః
+      </div>
+
+      <div class="opening-title">
+        శుభ వివాహ ఆహ్వానం
+      </div>
+
+      <p class="opening-subtitle">
+        రెండు హృదయాలు…<br>
+        రెండు కుటుంబాలు…<br>
+        ఒక అందమైన జీవిత ప్రయాణం…
+      </p>
+
+      <button
+        class="royal-button"
+        id="openInvitation"
+        type="button"
+      >
+        📜 ఆహ్వాన పత్రికను తెరవండి
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     MAIN WEBSITE
+========================================================= -->
+
+<div id="weddingSite">
+
+
+  <!-- =======================================================
+       NAVIGATION
+  ======================================================== -->
+
+  <nav class="navbar navbar-expand-lg manuscript-nav">
+
+    <div class="container">
+
+      <a
+        class="navbar-brand text-warning"
+        href="#hero"
+      >
+        ॐ
+      </a>
+
+      <button
+        class="navbar-toggler bg-warning"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#mainNav"
+      >
+        ☰
+      </button>
+
+      <div
+        class="collapse navbar-collapse"
+        id="mainNav"
+      >
+
+        <ul class="navbar-nav mx-auto">
+
+          <li class="nav-item">
+            <a class="nav-link" href="#couple">
+              వధూవరులు
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="#rituals">
+              సంప్రదాయాలు
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="#events">
+              కార్యక్రమాలు
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="#venue">
+              వేదిక
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="#gallery">
+              జ్ఞాపకాలు
+            </a>
+          </li>
+
+        </ul>
+
+        <button
+          id="themeToggle"
+          class="theme-button"
+          title="థీమ్ మార్చండి"
+        >
+          ☾
+        </button>
+
+      </div>
+
+    </div>
+
+  </nav>
+
+
+  <!-- =======================================================
+       HERO
+  ======================================================== -->
+
+  <section id="hero" class="manuscript-texture">
+
+    <div class="container">
+
+      <div class="hero-manuscript reveal">
+
+        <div class="hero-symbol">
+          ❈
+        </div>
+
+        <div class="sanskrit">
+          శ్రీ గణేశాయ నమః
+        </div>
+
+        <h1 class="hero-title">
+          వివాహ మహోత్సవం
+        </h1>
+
+        <div class="ornament"></div>
+
+        <div class="couple-names">
+          <span id="heroBride">
+            [BRIDE_NAME]
+          </span>
+
+          <br>
+
+          <span style="font-size:.55em;">
+            ✦ తో ✦
+          </span>
+
+          <br>
+
+          <span id="heroGroom">
+            [GROOM_NAME]
+          </span>
+        </div>
+
+        <p class="wedding-date" id="heroDate">
+          [WEDDING_DATE]
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =======================================================
+       COUPLE + FAMILY
+  ======================================================== -->
+
+  <section id="couple" class="manuscript-texture">
+
+    <div class="container">
+
+      <div class="section-heading reveal">
+
+        <div class="small-title">
+          రెండూ కుటుంబాల కలయిక
+        </div>
+
+        <h2>
+          ఒక అందమైన బంధం
+        </h2>
+
+        <div class="ornament"></div>
+
+        <p>
+          రెండు కుటుంబాల ఆశీస్సులతో,
+          రెండు హృదయాలు ఒకే జీవిత ప్రయాణంలో
+          అడుగులు వేయబోతున్న శుభసందర్భం.
+        </p>
+
+      </div>
+
+
+      <div class="row g-4">
+
+        <!-- Bride -->
+
+        <div class="col-md-6 reveal">
+
+          <div class="manuscript-card text-center">
+
+            <div class="portrait-frame">
+
+              <img
+                id="bridePhoto"
+                src=""
+                alt="వధువు చిత్రం"
+                loading="lazy"
+                hidden
+              >
+
+              <div
+                id="bridePlaceholder"
+                class="portrait-placeholder"
+              >
+                [BRIDE_PHOTO]
+              </div>
+
+            </div>
+
+            <div class="person-name" id="brideName">
+              [BRIDE_NAME]
+            </div>
+
+            <p>
+              వధువు
+            </p>
+
+            <div class="ink-line"></div>
+
+            <p id="brideFamily">
+              [FAMILY_NAMES]
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <!-- Groom -->
+
+        <div class="col-md-6 reveal">
+
+          <div class="manuscript-card text-center">
+
+            <div class="portrait-frame">
+
+              <img
+                id="groomPhoto"
+                src=""
+                alt="వరుడు చిత్రం"
+                loading="lazy"
+                hidden
+              >
+
+              <div
+                id="groomPlaceholder"
+                class="portrait-placeholder"
+              >
+                [GROOM_PHOTO]
+              </div>
+
+            </div>
+
+            <div class="person-name" id="groomName">
+              [GROOM_NAME]
+            </div>
+
+            <p>
+              వరుడు
+            </p>
+
+            <div class="ink-line"></div>
+
+            <p id="groomFamily">
+              [FAMILY_NAMES]
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- Couple Story -->
+
+      <div class="story-scroll manuscript-texture mt-5 reveal">
+
+        <div style="color:var(--gold);font-size:35px;">
+          ❧
+        </div>
+
+        <h3 style="color:var(--maroon);">
+          ఒక చారిత్రక కథలా…
+        </h3>
+
+        <p id="coupleStory">
+          [COUPLE_STORY]
+        </p>
+
+        <div style="color:var(--gold);font-size:35px;">
+          ❧
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =======================================================
+       RITUALS
+  ======================================================== -->
+
+  <section id="rituals">
+
+    <div class="container">
+
+      <div class="section-heading reveal">
+
+        <div class="small-title">
+          మన సంప్రదాయం
+        </div>
+
+        <h2>
+          శుభ వివాహ సంప్రదాయాలు
+        </h2>
+
+        <div class="ornament"></div>
+
+        <p>
+          తరతరాలుగా కొనసాగుతున్న పవిత్రమైన తెలుగు
+          వివాహ సంప్రదాయాలకు ఒక అందమైన డిజిటల్ రూపం.
+        </p>
+
+      </div>
+
+
+      <div class="row g-4">
+
+        <div class="col-md-4 reveal">
+
+          <div class="ritual-card">
+
+            <div class="ritual-icon">
+              🪔
+            </div>
+
+            <h3>
+              మంగళస్నానం
+            </h3>
+
+            <p>
+              [RITUAL_1_DESCRIPTION]
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="col-md-4 reveal">
+
+          <div class="ritual-card">
+
+            <div class="ritual-icon">
+              🌸
+            </div>
+
+            <h3>
+              జీలకర్ర బెల్లం
+            </h3>
+
+            <p>
+              [RITUAL_2_DESCRIPTION]
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="col-md-4 reveal">
+
+          <div class="ritual-card">
+
+            <div class="ritual-icon">
+              🔥
+            </div>
+
+            <h3>
+              అగ్ని సాక్షిగా
+            </h3>
+
+            <p>
+              [RITUAL_3_DESCRIPTION]
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- Sapthapadi -->
+
+      <div class="section-heading reveal mt-5">
+
+        <div class="small-title">
+          పవిత్రమైన ఏడు అడుగులు
+        </div>
+
+        <h2>
+          సప్తపది
+        </h2>
+
+      </div>
+
+
+      <div class="sapthapadi-container reveal">
+
+        <div class="steps">
+
+          <button class="step-button active" data-step="1">
+            ౧
+          </button>
+
+          <button class="step-button" data-step="2">
+            ౨
+          </button>
+
+          <button class="step-button" data-step="3">
+            ౩
+          </button>
+
+          <button class="step-button" data-step="4">
+            ౪
+          </button>
+
+          <button class="step-button" data-step="5">
+            ౫
+          </button>
+
+          <button class="step-button" data-step="6">
+            ౬
+          </button>
+
+          <button class="step-button" data-step="7">
+            ౭
+          </button>
+
+        </div>
+
+
+        <div class="vow-box">
+
+          <div
+            class="vow-number"
+            id="vowNumber"
+          >
+            మొదటి అడుగు
+          </div>
+
+          <div
+            class="vow-text"
+            id="vowText"
+          >
+            [SAPTHAPADI_VOW_1]
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =======================================================
+       EVENTS
+  ======================================================== -->
+
+  <section id="events" class="manuscript-texture">
+
+    <div class="container">
+
+      <div class="section-heading reveal">
+
+        <div class="small-title">
+          శుభ కార్యక్రమాలు
+        </div>
+
+        <h2>
+          వివాహ వేడుకల కాలక్రమం
+        </h2>
+
+        <div class="ornament"></div>
+
+      </div>
+
+
+      <div
+        class="row g-4"
+        id="eventsContainer"
+      ></div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =======================================================
+       COUNTDOWN
+  ======================================================== -->
+
+  <section class="countdown-section">
+
+    <div class="container">
+
+      <div class="section-heading reveal">
+
+        <div class="small-title">
+          ఆ శుభక్షణం కోసం…
+        </div>
+
+        <h2>
+          ఎదురుచూపులు మొదలయ్యాయి
+        </h2>
+
+        <p>
+          మా జీవితంలోని ఈ ప్రత్యేకమైన రోజును
+          మీతో కలిసి జరుపుకోవాలని ఎదురుచూస్తున్నాము.
+        </p>
+
+      </div>
+
+
+      <div
+        class="countdown-box reveal"
+        id="countdown"
+      >
+
+        <div class="time-box">
+
+          <div
+            class="time-number"
+            id="days"
+          >
+            00
+          </div>
+
+          <div class="time-label">
+            రోజులు
+          </div>
+
+        </div>
+
+
+        <div class="time-box">
+
+          <div
+            class="time-number"
+            id="hours"
+          >
+            00
+          </div>
+
+          <div class="time-label">
+            గంటలు
+          </div>
+
+        </div>
+
+
+        <div class="time-box">
+
+          <div
+            class="time-number"
+            id="minutes"
+          >
+            00
+          </div>
+
+          <div class="time-label">
+            నిమిషాలు
+          </div>
+
+        </div>
+
+
+        <div class="time-box">
+
+          <div
+            class="time-number"
+            id="seconds"
+          >
+            00
+          </div>
+
+          <div class="time-label">
+            సెకన్లు
+          </div>
+
+        </div>
+
+      </div>
+
+      <div
+        id="weddingToday"
+        class="text-center mt-4"
+        style="display:none;font-size:28px;"
+      >
+        ఈరోజే ఆ శుభదినం! ❤️
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =======================================================
+       VENUE
+  ======================================================== -->
+
+  <section id="venue" class="manuscript-texture">
+
+    <div class="container">
+
+      <div class="section-heading reveal">
+
+        <div class="small-title">
+          శుభ వేదిక
+        </div>
+
+        <h2>
+          మీ అడుగులు చేరాల్సిన చోటు
+        </h2>
+
+      </div>
+
+
+      <div class="venue-card reveal">
+
+        <div class="venue-icon">
+          🛕
+        </div>
+
+        <h3 id="venueName">
+          [VENUE_NAME]
+        </h3>
+
+        <div class="ornament"></div>
+
+        <p
+          class="venue-address"
+          id="venueAddress"
+        >
+          [VENUE_ADDRESS]
+        </p>
+
+
+        <div class="action-buttons">
+
+          <a
+            id="mapsButton"
+            class="action-button"
+            href="#"
+            target="_blank"
+            rel="noopener"
+          >
+            📍 Google Maps
+          </a>
+
+          <button
+            class="action-button"
+            id="calendarButton"
+          >
+            📅 క్యాలెండర్‌లో చేర్చండి
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =======================================================
+       GALLERY
+  ======================================================== -->
+
+  <section id="gallery">
+
+    <div class="container">
+
+      <div class="section-heading reveal">
+
+        <div class="small-title">
+          జ్ఞాపకాల పుటలు
+        </div>
+
+        <h2>
+          మా అందమైన క్షణాలు
+        </h2>
+
+        <div class="ornament"></div>
+
+      </div>
+
+
+      <div
+        class="row g-3"
+        id="galleryContainer"
+      ></div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =======================================================
+       RSVP
+  ======================================================== -->
+
+  <section id="rsvp" class="manuscript-texture">
+
+    <div class="container">
+
+      <div class="section-heading reveal">
+
+        <div class="small-title">
+          మీ రాకే మా ఆనందం
+        </div>
+
+        <h2>
+          హాజరును తెలియజేయండి
+        </h2>
+
+        <p>
+          మీ విలువైన సమయాన్ని మాతో పంచుకునేందుకు
+          మీ రాకను తెలియజేయండి.
+        </p>
+
+      </div>
+
+
+      <div class="rsvp-card reveal">
+
+        <form id="rsvpForm">
+
+          <div class="mb-3">
+
+            <label class="form-label">
+              మీ పేరు
+            </label>
+
+            <input
+              type="text"
+              class="form-control"
+              id="guestName"
+              placeholder="మీ పేరు"
+              required
+            >
+
+          </div>
+
+
+          <div class="mb-3">
+
+            <label class="form-label">
+              హాజరు
+            </label>
+
+            <select
+              class="form-select"
+              id="attendance"
+              required
+            >
+
+              <option value="">
+                ఎంపిక చేయండి
+              </option>
+
+              <option>
+                తప్పకుండా వస్తాను
+              </option>
+
+              <option>
+                రాలేను
+              </option>
+
+              <option>
+                ఇంకా నిర్ధారించలేదు
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="mb-3">
+
+            <label class="form-label">
+              సందేశం
+            </label>
+
+            <textarea
+              class="form-control"
+              id="guestMessage"
+              rows="4"
+              placeholder="మీ ఆశీస్సులు..."
+            ></textarea>
+
+          </div>
+
+
+          <button
+            class="royal-button w-100"
+            type="submit"
+          >
+            ఆశీస్సులు పంపండి
+          </button>
+
+        </form>
+
+      </div>
+
+
+      <div class="action-buttons mt-4 reveal">
+
+        <button
+          class="action-button"
+          id="whatsappButton"
+        >
+          💬 WhatsApp ద్వారా పంచుకోండి
+        </button>
+
+        <button
+          class="action-button"
+          id="copyLinkButton"
+        >
+          🔗 ఆహ్వాన లింక్ కాపీ చేయండి
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =======================================================
+       FINAL BLESSINGS
+  ======================================================== -->
+
+  <section id="blessings">
+
+    <div class="container">
+
+      <div class="section-heading reveal">
+
+        <div class="deepam">
+          🪔
+        </div>
+
+        <div class="small-title">
+          మా మనస్ఫూర్తి ఆహ్వానం
+        </div>
+
+        <h2>
+          మీ రాక… మీ ఆశీస్సులు…
+        </h2>
+
+        <p>
+          మా జీవితంలో మరపురాని జ్ఞాపకం
+        </p>
+
+        <div class="ornament"></div>
+
+        <div class="final-names">
+          <span id="finalBride">
+            [BRIDE_NAME]
+          </span>
+
+          <br>
+
+          <span style="font-size:.5em;">
+            ✦ తో ✦
+          </span>
+
+          <br>
+
+          <span id="finalGroom">
+            [GROOM_NAME]
+          </span>
+        </div>
+
+        <p id="finalFamilies">
+          [FAMILY_NAMES]
+        </p>
+
+        <div
+          style="
+            color:var(--gold);
+            font-size:30px;
+            margin-top:30px;
+          "
+        >
+          ❈ ❈ ❈
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+</div>
+
+
+<!-- =========================================================
+     MUSIC PLAYER
+========================================================= -->
+
+<div
+  class="music-player"
+  id="musicPlayer"
+>
+
+  <div class="music-title">
+
+    🎵
+    <span id="songTitle">
+      [WEDDING_SONG_TITLE]
+    </span>
+
+  </div>
+
+  <div class="music-controls">
+
+    <button
+      class="music-button"
+      id="playPause"
+      title="పాట ప్లే / పాజ్"
+    >
+      ▶
+    </button>
+
+    <div class="progress-container">
+
+      <input
+        type="range"
+        id="musicProgress"
+        value="0"
+        min="0"
+        max="100"
+      >
+
+    </div>
+
+    <button
+      class="music-button"
+      id="muteButton"
+      title="మ్యూట్"
+    >
+      🔊
+    </button>
+
+    <input
+      class="volume"
+      id="volumeControl"
+      type="range"
+      min="0"
+      max="1"
+      step=".01"
+      value=".7"
+      title="వాల్యూమ్"
+    >
+
+  </div>
+
+</div>
+
+
+<audio id="weddingAudio" preload="metadata"></audio>
+
+
+<!-- =========================================================
+     TEMPLE BELL
+========================================================= -->
+
+<button
+  id="bellButton"
+  title="దేవాలయ గంట"
+>
+  🔔
+</button>
+
+
+<!-- =========================================================
+     LIGHTBOX
+========================================================= -->
+
+<div id="lightbox">
+
+  <button id="closeLightbox">
+    ×
+  </button>
+
+  <img
+    id="lightboxImage"
+    src=""
+    alt="వివాహ జ్ఞాపకం"
+  >
+
+</div>
+
+
+<!-- =========================================================
+     TOAST
+========================================================= -->
+
+<div
+  class="custom-toast"
+  id="toast"
+></div>
+
+
+<!-- Bootstrap -->
+<script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+></script>
+
+
+<script>
+
+  /* =========================================================
+     WEDDING CONFIGURATION
+     
+     EDIT ONLY THIS SECTION
+  ========================================================= */
+
+  const CONFIG = {
+
+    brideName: "[BRIDE_NAME]",
+
+    groomName: "[GROOM_NAME]",
+
+    familyNames: "[FAMILY_NAMES]",
+
+    coupleStory: "[COUPLE_STORY]",
+
+
+    /*
+      IMPORTANT:
+      Use a valid future date such as:
+
+      "2027-02-14T10:30:00+05:30"
+
+      Do not leave [WEDDING_DATE] here if you want
+      the countdown to work.
+    */
+
+    weddingDate: "[WEDDING_DATE] [WEDDING_TIME]",
+
+
+    venueName: "[VENUE_NAME]",
+
+    venueAddress: "[VENUE_ADDRESS]",
+
+    googleMapsUrl: "[GOOGLE_MAPS_URL]",
+
+
+    weddingSongTitle: "[WEDDING_SONG_TITLE]",
+
+    weddingSongUrl: "[WEDDING_SONG_URL]",
+
+    songCoverImage: "[SONG_COVER_IMAGE]",
+
+
+    bridePhoto: "[BRIDE_PHOTO]",
+
+    groomPhoto: "[GROOM_PHOTO]",
+
+
+    sapthapadi: [
+
+      "[SAPTHAPADI_VOW_1]",
+
+      "[SAPTHAPADI_VOW_2]",
+
+      "[SAPTHAPADI_VOW_3]",
+
+      "[SAPTHAPADI_VOW_4]",
+
+      "[SAPTHAPADI_VOW_5]",
+
+      "[SAPTHAPADI_VOW_6]",
+
+      "[SAPTHAPADI_VOW_7]"
+
+    ],
+
+
+    events: [
+
+      {
+        name: "[EVENT_NAME]",
+        date: "[EVENT_DATE]",
+        time: "[EVENT_TIME]",
+        venue: "[EVENT_VENUE]",
+        description: "[EVENT_DESCRIPTION]"
+      },
+
+      {
+        name: "[EVENT_NAME]",
+        date: "[EVENT_DATE]",
+        time: "[EVENT_TIME]",
+        venue: "[EVENT_VENUE]",
+        description: "[EVENT_DESCRIPTION]"
+      },
+
+      {
+        name: "[EVENT_NAME]",
+        date: "[EVENT_DATE]",
+        time: "[EVENT_TIME]",
+        venue: "[EVENT_VENUE]",
+        description: "[EVENT_DESCRIPTION]"
+      }
+
+    ],
+
+
+    gallery: [
+
+      "[PHOTO_1]",
+      "[PHOTO_2]",
+      "[PHOTO_3]",
+      "[PHOTO_4]",
+      "[PHOTO_5]",
+      "[PHOTO_6]"
+
+    ]
+
+  };
+
+
+  /* =========================================================
+     HELPER
+  ========================================================= */
+
+  function isPlaceholder(value) {
+
+    return (
+      !value ||
+      value.includes("[")
+    );
+
+  }
+
+
+  /* =========================================================
+     SET TEXT
+  ========================================================= */
+
+  function setText(id, value) {
+
+    const element = document.getElementById(id);
+
+    if (element && value) {
+      element.textContent = value;
+    }
+
+  }
+
+
+  /* =========================================================
+     INITIALIZE BASIC CONTENT
+  ========================================================= */
+
+  function initializeContent() {
+
+    setText("heroBride", CONFIG.brideName);
+    setText("heroGroom", CONFIG.groomName);
+
+    setText("brideName", CONFIG.brideName);
+    setText("groomName", CONFIG.groomName);
+
+    setText("finalBride", CONFIG.brideName);
+    setText("finalGroom", CONFIG.groomName);
+
+    setText("brideFamily", CONFIG.familyNames);
+    setText("groomFamily", CONFIG.familyNames);
+    setText("finalFamilies", CONFIG.familyNames);
+
+    setText("coupleStory", CONFIG.coupleStory);
+
+    setText("venueName", CONFIG.venueName);
+    setText("venueAddress", CONFIG.venueAddress);
+
+    setText("songTitle", CONFIG.weddingSongTitle);
+
+
+    /* Wedding date */
+
+    if (!isPlaceholder(CONFIG.weddingDate)) {
+
+      const date = new Date(CONFIG.weddingDate);
+
+      if (!isNaN(date)) {
+
+        setText(
+          "heroDate",
+          date.toLocaleDateString(
+            "te-IN",
+            {
+              day: "numeric",
+              month: "long",
+              year: "numeric"
+            }
+          )
+        );
+
+      }
+
+    }
+
+
+    /* Google Maps */
+
+    if (!isPlaceholder(CONFIG.googleMapsUrl)) {
+
+      document.getElementById(
+        "mapsButton"
+      ).href = CONFIG.googleMapsUrl;
+
+    }
+
+
+    /* Bride photo */
+
+    if (!isPlaceholder(CONFIG.bridePhoto)) {
+
+      const image =
+        document.getElementById("bridePhoto");
+
+      image.src = CONFIG.bridePhoto;
+      image.hidden = false;
+
+      document.getElementById(
+        "bridePlaceholder"
+      ).style.display = "none";
+
+    }
+
+
+    /* Groom photo */
+
+    if (!isPlaceholder(CONFIG.groomPhoto)) {
+
+      const image =
+        document.getElementById("groomPhoto");
+
+      image.src = CONFIG.groomPhoto;
+      image.hidden = false;
+
+      document.getElementById(
+        "groomPlaceholder"
+      ).style.display = "none";
+
+    }
+
+
+    /* Music */
+
+    if (!isPlaceholder(CONFIG.weddingSongUrl)) {
+
+      document.getElementById(
+        "weddingAudio"
+      ).src = CONFIG.weddingSongUrl;
+
+    }
+
+  }
+
+
+  /* =========================================================
+     EVENTS
+  ========================================================= */
+
+  function renderEvents() {
+
+    const container =
+      document.getElementById(
+        "eventsContainer"
+      );
+
+    container.innerHTML = "";
+
+
+    CONFIG.events.forEach(
+      (event, index) => {
+
+        const column =
+          document.createElement("div");
+
+        column.className =
+          "col-md-4 reveal";
+
+
+        column.innerHTML = `
+
+          <article class="event-card">
+
+            <div class="event-date">
+              ${event.date}
+            </div>
+
+            <h3>
+              ${event.name}
+            </h3>
+
+            <div class="ornament"></div>
+
+            <p>
+              🕰 ${event.time}
+            </p>
+
+            <p>
+              🛕 ${event.venue}
+            </p>
+
+            <p>
+              ${event.description}
+            </p>
+
+          </article>
+
+        `;
+
+
+        container.appendChild(column);
+
+      }
+    );
+
+  }
+
+
+  /* =========================================================
+     GALLERY
+  ========================================================= */
+
+  function renderGallery() {
+
+    const container =
+      document.getElementById(
+        "galleryContainer"
+      );
+
+    container.innerHTML = "";
+
+
+    CONFIG.gallery.forEach(
+      (photo, index) => {
+
+        const column =
+          document.createElement("div");
+
+        column.className =
+          "col-6 col-md-4 reveal";
+
+
+        if (isPlaceholder(photo)) {
+
+          column.innerHTML = `
+
+            <div
+              class="gallery-item"
+              data-placeholder="${photo}"
+            >
+
+              <div class="gallery-placeholder">
+                ${photo}
+              </div>
+
+            </div>
+
+          `;
+
+        }
+
+        else {
+
+          column.innerHTML = `
+
+            <div
+              class="gallery-item"
+              data-image="${photo}"
+            >
+
+              <img
+                src="${photo}"
+                alt="వివాహ జ్ఞాపకం ${index + 1}"
+                loading="lazy"
+              >
+
+            </div>
+
+          `;
+
+        }
+
+
+        container.appendChild(column);
+
+      }
+    );
+
+
+    /* Lightbox */
+
+    document
+      .querySelectorAll(
+        ".gallery-item[data-image]"
+      )
+      .forEach(item => {
+
+        item.addEventListener(
+          "click",
+          () => {
+
+            document.getElementById(
+              "lightboxImage"
+            ).src = item.dataset.image;
+
+            document.getElementById(
+              "lightbox"
+            ).style.display = "flex";
+
+          }
+        );
+
+      });
+
+  }
+
+
+  /* =========================================================
+     SAPTHAPADI
+  ========================================================= */
+
+  const stepButtons =
+    document.querySelectorAll(
+      ".step-button"
+    );
+
+
+  function showStep(step) {
+
+    stepButtons.forEach(button => {
+
+      button.classList.toggle(
+        "active",
+        button.dataset.step == step
+      );
+
+    });
+
+
+    document.getElementById(
+      "vowNumber"
+    ).textContent =
+      ["మొదటి","రెండవ","మూడవ","నాల్గవ","ఐదవ","ఆరవ","ఏడవ"][step - 1]
+      + " అడుగు";
+
+
+    document.getElementById(
+      "vowText"
+    ).textContent =
+      CONFIG.sapthapadi[step - 1];
+
+  }
+
+
+  stepButtons.forEach(button => {
+
+    button.addEventListener(
+      "click",
+      () => {
+
+        showStep(
+          Number(button.dataset.step)
+        );
+
+      }
+    );
+
+  });
+
+
+  /* =========================================================
+     COUNTDOWN
+  ========================================================= */
+
+  function startCountdown() {
+
+    if (
+      isPlaceholder(
+        CONFIG.weddingDate
+      )
+    ) {
+
+      return;
+
+    }
+
+
+    const target =
+      new Date(
+        CONFIG.weddingDate
+      ).getTime();
+
+
+    if (isNaN(target)) {
+
+      return;
+
+    }
+
+
+    function updateCountdown() {
+
+      const now =
+        new Date().getTime();
+
+      const difference =
+        target - now;
+
+
+      if (difference <= 0) {
+
+        document.getElementById(
+          "countdown"
+        ).style.display = "none";
+
+        document.getElementById(
+          "weddingToday"
+        ).style.display = "block";
+
+        return;
+
+      }
+
+
+      const days =
+        Math.floor(
+          difference /
+          (1000 * 60 * 60 * 24)
+        );
+
+      const hours =
+        Math.floor(
+          (
+            difference /
+            (1000 * 60 * 60)
+          ) % 24
+        );
+
+      const minutes =
+        Math.floor(
+          (
+            difference /
+            (1000 * 60)
+          ) % 60
+        );
+
+      const seconds =
+        Math.floor(
+          (
+            difference /
+            1000
+          ) % 60
+        );
+
+
+      document.getElementById(
+        "days"
+      ).textContent =
+        String(days).padStart(2,"0");
+
+
+      document.getElementById(
+        "hours"
+      ).textContent =
+        String(hours).padStart(2,"0");
+
+
+      document.getElementById(
+        "minutes"
+      ).textContent =
+        String(minutes).padStart(2,"0");
+
+
+      document.getElementById(
+        "seconds"
+      ).textContent =
+        String(seconds).padStart(2,"0");
+
+    }
+
+
+    updateCountdown();
+
+    setInterval(
+      updateCountdown,
+      1000
+    );
+
+  }
+
+
+  /* =========================================================
+     OPEN INVITATION
+  ========================================================= */
+
+  document
+    .getElementById("openInvitation")
+    .addEventListener(
+      "click",
+      () => {
+
+        document
+          .getElementById("opening")
+          .style.transition =
+          "opacity 1s ease, transform 1s ease";
+
+        document
+          .getElementById("opening")
+          .style.opacity = "0";
+
+        document
+          .getElementById("opening")
+          .style.transform =
+          "scale(1.05)";
+
+
+        setTimeout(() => {
+
+          document
+            .getElementById("opening")
+            .style.display = "none";
+
+          document
+            .getElementById("weddingSite")
+            .style.display = "block";
+
+          document
+            .querySelector(".manuscript-nav")
+            .classList.add("show");
+
+
+          startPetals(15);
+
+          /*
+            Music starts only after user interaction.
+            This avoids mobile autoplay restrictions.
+          */
+
+          playMusic();
+
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+          });
+
+        }, 900);
+
+      }
+    );
+
+
+  /* =========================================================
+     MUSIC PLAYER
+  ========================================================= */
+
+  const audio =
+    document.getElementById(
+      "weddingAudio"
+    );
+
+  const playPause =
+    document.getElementById(
+      "playPause"
+    );
+
+  const progress =
+    document.getElementById(
+      "musicProgress"
+    );
+
+  const volume =
+    document.getElementById(
+      "volumeControl"
+    );
+
+  const mute =
+    document.getElementById(
+      "muteButton"
+    );
+
+
+  function playMusic() {
+
+    if (
+      isPlaceholder(
+        CONFIG.weddingSongUrl
+      )
+    ) {
+
+      showToast(
+        "వివాహ గీతం కోసం CONFIG లో పాట లింక్ ఇవ్వండి."
+      );
+
+      return;
+
+    }
+
+
+    audio.play()
+      .then(() => {
+
+        playPause.textContent = "Ⅱ";
+
+      })
+      .catch(() => {
+
+        showToast(
+          "పాటను ప్లే చేయడానికి మ్యూజిక్ బటన్ నొక్కండి."
+        );
+
+      });
+
+  }
+
+
+  playPause.addEventListener(
+    "click",
+    () => {
+
+      if (audio.paused) {
+
+        playMusic();
+
+      }
+
+      else {
+
+        audio.pause();
+
+        playPause.textContent = "▶";
+
+      }
+
+    }
+  );
+
+
+  audio.addEventListener(
+    "timeupdate",
+    () => {
+
+      if (audio.duration) {
+
+        progress.value =
+          (
+            audio.currentTime /
+            audio.duration
+          ) * 100;
+
+      }
+
+    }
+  );
+
+
+  progress.addEventListener(
+    "input",
+    () => {
+
+      if (audio.duration) {
+
+        audio.currentTime =
+          (
+            progress.value /
+            100
+          ) *
+          audio.duration;
+
+      }
+
+    }
+  );
+
+
+  volume.addEventListener(
+    "input",
+    () => {
+
+      audio.volume =
+        volume.value;
+
+    }
+  );
+
+
+  mute.addEventListener(
+    "click",
+    () => {
+
+      audio.muted =
+        !audio.muted;
+
+      mute.textContent =
+        audio.muted
+        ? "🔇"
+        : "🔊";
+
+    }
+  );
+
+
+  /* =========================================================
+     THEME SWITCH
+  ========================================================= */
+
+  const themeToggle =
+    document.getElementById(
+      "themeToggle"
+    );
+
+
+  themeToggle.addEventListener(
+    "click",
+    () => {
+
+      document.body.classList.toggle(
+        "dark-mode"
+      );
+
+
+      const dark =
+        document.body.classList.contains(
+          "dark-mode"
+        );
+
+
+      themeToggle.textContent =
+        dark
+        ? "☀"
+        : "☾";
+
+    }
+  );
+
+
+  /* =========================================================
+     TEMPLE BELL
+  ========================================================= */
+
+  document
+    .getElementById("bellButton")
+    .addEventListener(
+      "click",
+      () => {
+
+        const button =
+          document.getElementById(
+            "bellButton"
+          );
+
+        button.classList.remove(
+          "bell-ring"
+        );
+
+        void button.offsetWidth;
+
+        button.classList.add(
+          "bell-ring"
+        );
+
+
+        playBell();
+
+        startPetals(20);
+
+      }
+    );
+
+
+  function playBell() {
+
+    /*
+      Web Audio API generates a very soft bell-like tone.
+      No external sound file is required.
+    */
+
+    try {
+
+      const AudioContext =
+        window.AudioContext ||
+        window.webkitAudioContext;
+
+      const context =
+        new AudioContext();
+
+      const oscillator =
+        context.createOscillator();
+
+      const gain =
+        context.createGain();
+
+
+      oscillator.type =
+        "sine";
+
+      oscillator.frequency.setValueAtTime(
+        620,
+        context.currentTime
+      );
+
+      oscillator.frequency.exponentialRampToValueAtTime(
+        300,
+        context.currentTime + .9
+      );
+
+
+      gain.gain.setValueAtTime(
+        .0001,
+        context.currentTime
+      );
+
+      gain.gain.exponentialRampToValueAtTime(
+        .18,
+        context.currentTime + .03
+      );
+
+      gain.gain.exponentialRampToValueAtTime(
+        .0001,
+        context.currentTime + 1
+      );
+
+
+      oscillator.connect(gain);
+      gain.connect(context.destination);
+
+      oscillator.start();
+
+      oscillator.stop(
+        context.currentTime + 1
+      );
+
+    }
+
+    catch(error) {
+
+      console.log(
+        "Bell audio unavailable."
+      );
+
+    }
+
+  }
+
+
+  /* =========================================================
+     PETAL EFFECT
+  ========================================================= */
+
+  function startPetals(amount = 10) {
+
+    const container =
+      document.getElementById(
+        "petals"
+      );
+
+
+    for (
+      let i = 0;
+      i < amount;
+      i++
+    ) {
+
+      const petal =
+        document.createElement(
+          "div"
+        );
+
+
+      petal.className =
+        "petal";
+
+
+      petal.style.left =
+        Math.random() * 100 + "%";
+
+
+      petal.style.animationDuration =
+        (4 + Math.random() * 5) + "s";
+
+
+      petal.style.animationDelay =
+        Math.random() * 1.5 + "s";
+
+
+      petal.style.transform =
+        `rotate(${Math.random()*360}deg)`;
+
+
+      container.appendChild(
+        petal
+      );
+
+
+      setTimeout(
+        () => petal.remove(),
+        10000
+      );
+
+    }
+
+  }
+
+
+  /* =========================================================
+     SCROLL REVEAL
+  ========================================================= */
+
+  const revealObserver =
+    new IntersectionObserver(
+      entries => {
+
+        entries.forEach(entry => {
+
+          if (entry.isIntersecting) {
+
+            entry.target.classList.add(
+              "visible"
+            );
+
+            revealObserver.unobserve(
+              entry.target
+            );
+
+          }
+
+        });
+
+      },
+      {
+        threshold: .12
+      }
+    );
+
+
+  function initializeReveal() {
+
+    document
+      .querySelectorAll(".reveal")
+      .forEach(element => {
+
+        revealObserver.observe(
+          element
+        );
+
+      });
+
+  }
+
+
+  /* =========================================================
+     LIGHTBOX CLOSE
+  ========================================================= */
+
+  document
+    .getElementById("closeLightbox")
+    .addEventListener(
+      "click",
+      closeLightbox
+    );
+
+
+  document
+    .getElementById("lightbox")
+    .addEventListener(
+      "click",
+      event => {
+
+        if (
+          event.target.id ===
+          "lightbox"
+        ) {
+
+          closeLightbox();
+
+        }
+
+      }
+    );
+
+
+  function closeLightbox() {
+
+    document.getElementById(
+      "lightbox"
+    ).style.display = "none";
+
+  }
+
+
+  /* =========================================================
+     COPY INVITATION LINK
+  ========================================================= */
+
+  document
+    .getElementById("copyLinkButton")
+    .addEventListener(
+      "click",
+      async () => {
+
+        try {
+
+          await navigator.clipboard.writeText(
+            window.location.href
+          );
+
+          showToast(
+            "ఆహ్వాన లింక్ కాపీ అయింది."
+          );
+
+        }
+
+        catch(error) {
+
+          showToast(
+            "లింక్ కాపీ చేయలేకపోయాము."
+          );
+
+        }
+
+      }
+    );
+
+
+  /* =========================================================
+     WHATSAPP SHARE
+  ========================================================= */
+
+  document
+    .getElementById("whatsappButton")
+    .addEventListener(
+      "click",
+      () => {
+
+        const message =
+          `${CONFIG.brideName} & ${CONFIG.groomName} వివాహ ఆహ్వానం ❤️\n\n` +
+          `మీ రాక… మీ ఆశీస్సులు… మా జీవితంలో మరపురాని జ్ఞాపకం.\n\n` +
+          window.location.href;
+
+
+        const url =
+          "https://wa.me/?text=" +
+          encodeURIComponent(
+            message
+          );
+
+
+        window.open(
+          url,
+          "_blank"
+        );
+
+      }
+    );
+
+
+  /* =========================================================
+     ADD TO CALENDAR
+  ========================================================= */
+
+  document
+    .getElementById("calendarButton")
+    .addEventListener(
+      "click",
+      () => {
+
+        if (
+          isPlaceholder(
+            CONFIG.weddingDate
+          )
+        ) {
+
+          showToast(
+            "ముందుగా CONFIG లో వివాహ తేదీని నమోదు చేయండి."
+          );
+
+          return;
+
+        }
+
+
+        const start =
+          new Date(
+            CONFIG.weddingDate
+          );
+
+
+        if (isNaN(start)) {
+
+          showToast(
+            "వివాహ తేదీ సరైన ఫార్మాట్‌లో లేదు."
+          );
+
+          return;
+
+        }
+
+
+        /*
+          Default event duration: 3 hours.
+          Change if needed.
+        */
+
+        const end =
+          new Date(
+            start.getTime() +
+            3 * 60 * 60 * 1000
+          );
+
+
+        const formatDate =
+          date => {
+
+            return date
+              .toISOString()
+              .replace(/[-:]/g,"")
+              .replace(/\.\d{3}/,"");
+
+          };
+
+
+        const ics =
+`BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Telugu Wedding Manuscript//EN
+BEGIN:VEVENT
+UID:${Date.now()}@wedding
+DTSTAMP:${formatDate(new Date())}
+DTSTART:${formatDate(start)}
+DTEND:${formatDate(end)}
+SUMMARY:${CONFIG.brideName} & ${CONFIG.groomName} వివాహ మహోత్సవం
+LOCATION:${CONFIG.venueName}, ${CONFIG.venueAddress}
+DESCRIPTION:తెలుగు వివాహ ఆహ్వానం
+END:VEVENT
+END:VCALENDAR`;
+
+
+        const blob =
+          new Blob(
+            [ics],
+            {
+              type:
+                "text/calendar;charset=utf-8"
+            }
+          );
+
+
+        const url =
+          URL.createObjectURL(
+            blob
+          );
+
+
+        const link =
+          document.createElement(
+            "a"
+          );
+
+
+        link.href = url;
+
+        link.download =
+          "wedding-invitation.ics";
+
+        link.click();
+
+        URL.revokeObjectURL(
+          url
+        );
+
+      }
+    );
+
+
+  /* =========================================================
+     RSVP
+  ========================================================= */
+
+  document
+    .getElementById("rsvpForm")
+    .addEventListener(
+      "submit",
+      event => {
+
+        event.preventDefault();
+
+
+        const name =
+          document.getElementById(
+            "guestName"
+          ).value;
+
+
+        const attendance =
+          document.getElementById(
+            "attendance"
+          ).value;
+
+
+        const message =
+          document.getElementById(
+            "guestMessage"
+          ).value;
+
+
+        /*
+          Front-end only RSVP.
+
+          To actually store RSVP responses,
+          connect this form to your backend,
+          Google Forms, Formspree, Firebase,
+          Supabase, etc.
+        */
+
+
+        console.log({
+          name,
+          attendance,
+          message
+        });
+
+
+        showToast(
+          "మీ ఆశీస్సులు ఎంతో విలువైనవి. ధన్యవాదాలు ❤️"
+        );
+
+
+        event.target.reset();
+
+      }
+    );
+
+
+  /* =========================================================
+     TOAST
+  ========================================================= */
+
+  let toastTimeout;
+
+
+  function showToast(message) {
+
+    const toast =
+      document.getElementById(
+        "toast"
+      );
+
+
+    toast.textContent =
+      message;
+
+
+    toast.classList.add(
+      "show"
+    );
+
+
+    clearTimeout(
+      toastTimeout
+    );
+
+
+    toastTimeout =
+      setTimeout(
+        () => {
+
+          toast.classList.remove(
+            "show"
+          );
+
+        },
+        3000
+      );
+
+  }
+
+
+  /* =========================================================
+     TORANAM LEAVES
+  ========================================================= */
+
+  function createToranam() {
+
+    const toranam =
+      document.getElementById(
+        "openingToranam"
+      );
+
+
+    for (
+      let i = 0;
+      i < 22;
+      i++
+    ) {
+
+      const leaf =
+        document.createElement(
+          "div"
+        );
+
+
+      leaf.className =
+        "leaf";
+
+
+      leaf.style.left =
+        (i * 5) + "%";
+
+
+      leaf.style.transform =
+        `rotate(${30 + (i % 2) * 25}deg)`;
+
+
+      toranam.appendChild(
+        leaf
+      );
+
+    }
+
+  }
+
+
+  /* =========================================================
+     INITIALIZATION
+  ========================================================= */
+
+  initializeContent();
+
+  renderEvents();
+
+  renderGallery();
+
+  showStep(1);
+
+  startCountdown();
+
+  initializeReveal();
+
+  createToranam();
+
+</script>
+
+</body>
+</html>
